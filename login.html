@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html">Bett's Electronics</a>
+        <nav class="top-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="signup.html">Sign Up</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+        <form id="loginForm" action="#" method="post" style="max-width:400px;margin:0 auto;">
+            <label for="email">Email</label><br>
+            <input id="email" name="email" type="email" required style="width:100%;padding:8px;margin:6px 0;"><br>
+
+            <label for="password">Password</label><br>
+            <input id="password" name="password" type="password" required style="width:100%;padding:8px;margin:6px 0;"><br>
+
+            <button type="submit" style="width:100%;">Login</button>
+        </form>
+    </div>
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        const email = document.getElementById('email').value || '';
+        sessionStorage.setItem('bett_user', email);
+        window.location.href = 'index.html';
+      });
+    </script>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© <span id="year">2026</span> Bett's Electronics</div>
+        <nav class="footer-nav">
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+</body>
+</html>

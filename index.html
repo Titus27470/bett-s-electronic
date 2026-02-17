@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bett's Electronics</title>
+  <link rel="stylesheet" href="styles.css">
+  </head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Bett's Electronics</a>
+      <form class="search" onsubmit="return false;">
+        <input type="search" placeholder="Search products, brands or models">
+        <button>Search</button>
+      </form>
+      <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a id="signupLink" href="signup.html">Sign Up</a>
+        <a id="loginLink" href="login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-layout">
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul class="categories">
+        <li><a href="#">Smartphones</a></li>
+        <li><a href="#">Laptops</a></li>
+        <li><a href="#">TV & Home Theater</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a href="#">Smart Home</a></li>
+        <li><a href="#">Components</a></li>
+        <li><a href="#">Accessories</a></li>
+      </ul>
+
+      <h3>Filters</h3>
+      <label>Price up to</label>
+      <input type="range" min="0" max="200000" value="80000">
+    </aside>
+
+    <section class="content">
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Everything electronics — from phones to components</h1>
+          <p>Explore top brands, latest releases and unbeatable deals.</p>
+        </div>
+        <div class="hero-image">
+          <img src="https://via.placeholder.com/640x300?text=Electronics+Sale" alt="Electronics">
+        </div>
+      </section>
+
+      <div id="loggedOutMsg" style="background:#fff;padding:16px;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.04);margin-bottom:16px;">
+        <p><strong>Please sign up or log in to view our full product catalog.</strong></p>
+        <p>
+          <a href="signup.html">Create an account</a> or <a href="login.html">Log in</a> to continue.
+        </p>
+      </div>
+
+      <div id="productsArea">
+        <div class="toolbar">
+          <div class="results">Showing <strong>12</strong> of 120 products</div>
+          <div class="sort">
+            <label for="sort">Sort:</label>
+            <select id="sort">
+              <option>Most Popular</option>
+              <option>Newest</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <section class="products-grid">
+        <article class="product-card">
+          <img src="https://via.placeholder.com/300x180?text=Phone" alt="Phone">
+          <h4>Smartphone Model X</h4>
+          <div class="price">KES 25,000</div>
+          <button class="btn">View</button>
+        </article>
+
+        <article class="product-card">
+          <img src="https://via.placeholder.com/300x180?text=Laptop" alt="Laptop">
+          <h4>Ultra Laptop 15"</h4>
+          <div class="price">KES 120,000</div>
+          <button class="btn">View</button>
+        </article>
+
+        <article class="product-card">
+          <img src="https://via.placeholder.com/300x180?text=TV" alt="TV">
+          <h4>Smart LED TV 55"</h4>
+          <div class="price">KES 75,000</div>
+          <button class="btn">View</button>
+        </article>
+
+        <article class="product-card">
+          <img src="https://via.placeholder.com/300x180?text=Headphones" alt="Audio">
+          <h4>Noise-Cancelling Headphones</h4>
+          <div class="price">KES 15,000</div>
+          <button class="btn">View</button>
+        </article>
+
+        <!-- Add more product-card items or generate dynamically -->
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year">2026</span> Bett's Electronics</div>
+      <nav class="footer-nav">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Show products only when user is 'logged in' (sessionStorage demo)
+    const user = sessionStorage.getItem('bett_user');
+    const productsArea = document.getElementById('productsArea');
+    const loggedOutMsg = document.getElementById('loggedOutMsg');
+    const signupLink = document.getElementById('signupLink');
+    const loginLink = document.getElementById('loginLink');
+
+    function updateUI(){
+      const u = sessionStorage.getItem('bett_user');
+      if(u){
+        // show products
+        productsArea.style.display = '';
+        loggedOutMsg.style.display = 'none';
+        // replace signup/login with logout
+        signupLink.style.display = 'none';
+        loginLink.textContent = 'Logout';
+        loginLink.href = '#';
+        loginLink.addEventListener('click', function(e){
+          e.preventDefault();
+          sessionStorage.removeItem('bett_user');
+          updateUI();
+        });
+      }else{
+        productsArea.style.display = 'none';
+        loggedOutMsg.style.display = '';
+        signupLink.style.display = '';
+        loginLink.textContent = 'Login';
+        loginLink.href = 'login.html';
+      }
+    }
+
+    updateUI();
+
+    // set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
